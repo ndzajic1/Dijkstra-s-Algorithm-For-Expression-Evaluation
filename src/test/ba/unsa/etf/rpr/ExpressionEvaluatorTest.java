@@ -18,13 +18,6 @@ class ExpressionEvaluatorTest {
         assertEquals(5, ExpressionEvaluator.evaluate("( 1 + ( 1 + ( 1 + ( 1 + ( 1 / 1 ) ) ) ) )"));
     }
 
-    @Test
-    void evaluateValidUsingInstance() {
-        ExpressionEvaluator ev = new ExpressionEvaluator();
-        assertEquals(2.2,
-                ev.evaluate("( 1 + ( ( 3 / 2 ) * ( 4 / 5 ) ) )"));
-    }
-
     // Checking if the exception is thrown for division by zero.
     @Test
     void checkExceptionDivByZero() {
@@ -56,10 +49,50 @@ class ExpressionEvaluatorTest {
         assertThrows(RuntimeException.class, () ->
                 ExpressionEvaluator.evaluate("( 0.5 ( 3 * sqrt ( 0.5 ) )"));
     }
+
     @Test
     void invalidInput4() {
         assertThrows(RuntimeException.class, () ->
                 ExpressionEvaluator.evaluate("( 0.5 ( 3 * sqrt ( 0.5 ) )"));
+    }
+
+    @Test
+    void checkMain(){
+        assertThrows(RuntimeException.class, ()->{
+            String[] str=new String[1];
+            str[0]="( 1 + sqrt 4 ) )";
+            App.main(str);
+        });
+}
+@Test
+    void invalidBrackets1(){
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 3 * ( sqrt ( 0.5 ) + 5 )"));
+    }
+    @Test
+    void invalidBrackets2(){
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 0.5 / ( 3 + 5 ) ("));
+    }
+    @Test
+    void invalidBrackets3(){
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 0.5 )"));
+    }
+    @Test
+    void invalidBrackets4(){
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("0.5 * 0.5"));
+    }
+    @Test
+    void invalidBrackets5(){
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 1 + ( 2 * 3 / 4 ) )"));
+    }
+    @Test
+    void invalidInput5(){
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 1 + ( 2 * rpr / 4 ) )"));
     }
 
 

@@ -48,6 +48,8 @@ public class ExpressionEvaluator {
 
     @SuppressWarnings({"UnusedReturnValue", "StatementWithEmptyBody"})
     public static Double evaluate(String expr) {
+        ExpressionValidator ev=new ExpressionValidator(expr);
+        ev.checkAll();
         for (String s : expr.split(" ")) {
             if (opsDomain.containsKey(s))
                 operations.push(s);

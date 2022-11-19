@@ -1,13 +1,21 @@
 package ba.unsa.etf.rpr;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExpressionEvaluatorTest {
+
     @Test
     void evaluateValid() {
+
         assertEquals(101, ExpressionEvaluator.evaluate("( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )"));
+    }
+
+    @Test
+    void evaluateValidAgain() {
+
+        assertEquals(5, ExpressionEvaluator.evaluate("( 1 + ( 1 + ( 1 + ( 1 + ( 1 / 1 ) ) ) ) )"));
     }
 
     @Test
@@ -30,4 +38,29 @@ class ExpressionEvaluatorTest {
         assertThrows(RuntimeException.class, () ->
                 ExpressionEvaluator.evaluate("( 1 + ( ( 2 + sqrt ( -5 ) ) * ( 4 / 3 ) ) ) "));
     }
+
+    @Test
+    void invalidInputAdjacentOperators() {
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 1 + ( ( 2 + / 7 ) * ( 4 / 3 ) ) )"));
+    }
+
+    @Test
+    void invalidInput2() {
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 2 2 2 2 * 7 / 3 ) ) )"));
+    }
+
+    @Test
+    void invalidInput3() {
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 0.5 ( 3 * sqrt ( 0.5 ) )"));
+    }
+    @Test
+    void invalidInput4() {
+        assertThrows(RuntimeException.class, () ->
+                ExpressionEvaluator.evaluate("( 0.5 ( 3 * sqrt ( 0.5 ) )"));
+    }
+
+
 }

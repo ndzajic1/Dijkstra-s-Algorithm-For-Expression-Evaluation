@@ -14,7 +14,8 @@ Ignore the left parentheses.
 On encountering a right parenthesis, pop an operator, pop the requisite number of operands, and push onto the operand stack the result of applying that operator to those operands.
 After the final right parenthesis has been processed, there is one value on the stack, which is the value of the expression. 
 
-This method may seem mysterious at first, but it is easy to convince yourself that it computes the proper value: any time the algorithm encounters a subexpression consisting of two operands separated by an operator, all surrounded by parentheses, it leaves the result of performing that operation on those operands on the operand stack. The result is the same as if that value had appeared in the input instead of the subexpression, so we can think of replacing the subexpression with the value to get an expression that would yield the same result. We can apply this argument again and again until we get a single value. For example, the algorithm computes the same value for all of these expressions:					
+This method may seem mysterious at first, but it is easy to convince yourself that it computes the proper value: any time the algorithm encounters a subexpression consisting of two operands separated by an operator, all surrounded by parentheses, it leaves the result of performing that operation on those operands on the operand stack. The result is the same as if that value had appeared in the input instead of the subexpression, so we can think of replacing the subexpression with the value to get an expression that would yield the same result. We can apply this argument again and again until we get a single value. For example, the algorithm computes the same value for all of these expressions:
+
 ( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )  
 ( 1 + ( 5 * ( 4 * 5 ) ) ) 
 ( 1 + ( 5 * 20 ) )
